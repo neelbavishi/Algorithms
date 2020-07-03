@@ -30,11 +30,7 @@ class MergeIntervals {
            listOfintervals.add(obj);
        }
        
-       Collections.sort(listOfintervals, new Comparator<Interval>()  {
-           public int compare(Interval i1, Interval i2){
-               return i1.start - i2.start;
-           }
-       });
+       Collections.sort(listOfintervals, Comparator.comparingInt(a -> a.start));
        
        Stack<Interval> s = new Stack<Interval>();
        s.push(listOfintervals.get(0));
@@ -48,7 +44,7 @@ class MergeIntervals {
            }
            else {
                //merge intervals
-               if(listOfintervals.get(i).start <= obj.end  && listOfintervals.get(i).end >                           obj.end) {
+               if(listOfintervals.get(i).start <= obj.end  && listOfintervals.get(i).end > obj.end) {
                    Interval o1 = s.pop();
                    o1.end = listOfintervals.get(i).end;
                    s.push(o1);
